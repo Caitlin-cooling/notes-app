@@ -35,5 +35,11 @@ describe Note do
       notes = subject.add(note1, note2)
       expect(subject.choose_note(1)).to eq ({:title => "To Do Today", :body => "Go Shopping"})
     end
+    it "selects a note and shows the title and body" do
+      note1 = subject.create("Shopping List", "Buy Grapes")
+      note2 = subject.create("To Do Today", "Go Shopping")
+      notes = subject.add(note1, note2)
+      expect(subject.choose_note(0)).to eq ({:title => "Shopping List", :body => "Buy Grapes"})
+    end
   end
 end
