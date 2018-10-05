@@ -1,40 +1,28 @@
-require "notes_app"
-
+require 'notes_app'
 describe Note do
-  let(:note1 ) { subject.create("Shopping List", "Buy Grapes") }
-  let(:note2) { subject.create("To Do Today", "Go Shopping") }
-  describe "#create" do
-    it "creates a note" do
-      title = "Shopping List"
-      body = "Buy grapes"
-      expect(subject.create(title, body)).to eq ({ :title => "Shopping List", :body => "Buy grapes"})
-    end
+  let(:notepad) { Note.new }
+  let(:note_1) { notepad.add("title", "body") }
+  let(:note_2) { notepad.add("hello", "goodbye") }
+  it "should allow the user to view the titles" do
+    note_1
+    expect(notepad.list).to eq("title")
   end
-  describe "#add(note)" do
-    it "shows the title and body of one note that has been added to an array" do
-      title = "Shopping List"
-      body = "Buy grapes"
-      expect(subject.add(subject.create(title, body))).to eq [{ :title => "Shopping List", :body => "Buy grapes"}]
-    end
+
+  it "should allow the user to view titles of multiple notes" do
+    note_1
+    note_2
+    expect(notepad.list).to eq("title\nhello")
   end
-  describe "#show" do
-    it "shows the titles for 1 note" do
-      notes = subject.add(note1)
-      expect(subject.show(notes)).to eq ["Shopping List"]
-    end
-    it "shows the titles for 2 notes" do
-      notes = subject.add(note1, note2)
-      expect(subject.show(notes)).to eq ["Shopping List", "To Do Today"]
-    end
+
+  it "should show the title and body of a selected note" do
+    note_1
+    expect(notepad.show("title")).to eq "title\nbody"
   end
-  describe "#choose" do
-    it "selects a note and shows the title and body" do
-      notes = subject.add(note1, note2)
-      expect(subject.choose_note(1)).to eq ({:title => "To Do Today", :body => "Go Shopping"})
-    end
-    it "selects a note and shows the title and body" do
-      notes = subject.add(note1, note2)
-      expect(subject.choose_note(0)).to eq ({:title => "Shopping List", :body => "Buy Grapes"})
-    end
+
+  it "should show the title and body of a selected note from the notepad" do
+    note_1
+    note_2
+    expect(notepad.show(1)).to eq "hello\ngoodbye"
   end
+
 end

@@ -1,23 +1,27 @@
 class Note
+
   def initialize
-    @notes = []
+    @entries = []
   end
-  def create(title, body)
-    @new_note = {:title => title, :body => body}
+
+  def add(title, body)
+    new_note = {:title => title, :body => body}
+    @entries << new_note
   end
-  def add(*notes)
-    notes.each do |note|
-      @notes << note
-    end
-  end
-  def show(notes)
+
+  def list
     titles = []
-    @notes.each do |note|
+    @entries.each do |note|
       titles << note[:title]
     end
-    titles
+    titles.join("\n")
   end
-  def choose_note(index)
-    @notes[index]
+
+  def show(index)
+    chosen_note = @entries[index.to_i]
+    chosen_title = chosen_note[:title]
+    chosen_body = chosen_note[:body]
+    "#{chosen_title}\n#{chosen_body}"
   end
+
 end
