@@ -4,17 +4,27 @@ class Note
   end
   def create(title, body)
     @new_note = {:title => title, :body => body}
-    @new_note[:title]
+    @new_note
   end
-  def add(note)
-    @notes << @new_note
+  def add(*notes)
+    @notes << notes
   end
-  def show
-    p @new_note[:title]
+  def show(notes)
+    titles = []
+    @notes.each do |contents|
+      contents. each do |note|
+        titles << note[:title]
+      end
+    end
+    titles
+  end
+  def choose_note(index)
+
   end
 end
 
-# @notes = [{:title => "Shopping", :body => "Buy shoes"}, {:title => "Class notes", :body => "TDD is great" }]
-note = Note.new
-note.create("Shopping List", "Buy grapes")
-note.show
+# note = Note.new
+# note1 = note.create("Shopping List", "Buy Grapes")
+# note2 = note.create("To Do Today", "Go Shopping")
+# notes = note.add(note1, note2)
+# p note.show(notes)
