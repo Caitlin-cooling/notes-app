@@ -12,7 +12,7 @@ describe Note do
     it "shows the title and body of one note that has been added to an array" do
       title = "Shopping List"
       body = "Buy grapes"
-      expect(subject.add(subject.create(title, body))).to eq [[{ :title => "Shopping List", :body => "Buy grapes"}]]
+      expect(subject.add(subject.create(title, body))).to eq [{ :title => "Shopping List", :body => "Buy grapes"}]
     end
   end
   describe "#show" do
